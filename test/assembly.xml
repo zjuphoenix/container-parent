@@ -8,13 +8,12 @@
     <includeBaseDirectory>true</includeBaseDirectory>
     <fileSets>
         <fileSet>
-            <directory>src/main/resources</directory>
-            <includes>
-                <include>config.json</include>
-            </includes>
-            <fileMode>0744</fileMode>
-            <directoryMode>0755</directoryMode>
-            <outputDirectory>.</outputDirectory>
+            <directory>src/main/resources/container</directory>
+            <outputDirectory>/container/container</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/output/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
         </fileSet>
     </fileSets>
     <dependencySets>

@@ -36,6 +36,31 @@
     </dependencies>
 
     <build>
+        <!-- 主资源目录 -->
+        <resources>
+            <resource>
+                <!-- 设定主资源目录  -->
+                <directory>src/main/resources</directory>
+
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，只处理如下配置中包含的资源类型
+                <includes>
+                    <include>*.xml</include>
+                </includes>
+                 -->
+
+                <excludes>
+                    <exclude>container/</exclude>
+                </excludes>
+
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录
+                <targetPath>d:/</targetPath>
+                   -->
+
+                <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，是否对主资源目录开启资源过滤 -->
+                <!--<filtering>true</filtering>-->
+
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -46,6 +71,52 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <configurationDirectory>container</configurationDirectory>
+                    <!--<configurationSourceDirectory>${basedir}/src/main/resources</configurationSourceDirectory>
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>-->
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <assembleDirectory>${project.build.directory}/output</assembleDirectory>
+                    <!--
+                        -Xms200m:JVM初始分配内存
+                        -Xmx200m:JVM最大可用内存
+                        -Xss1m:设置每个线程的堆栈大小128k
+                        -XX:NewRatio=4:设置年轻代（包括Eden和两个Survivor区）与年老代的比值（除去持久代）。设置为4，则年轻代与年老代所占比值为1：4，年轻代占整个堆栈的1/5
+                        -XX:SurvivorRatio=4:设置年轻代中Eden区与Survivor区的大小比值。设置为4，则两个Survivor区与一个Eden区的比值为2:4，一个Survivor区占整个年轻代的1/6
+                        -XX:MaxTenuringThreshold=0:设置垃圾最大年龄。如果设置为0的话，则年轻代对象不经过Survivor区，直接进入年老代。
+                    -->
+                    <extraJvmArguments>-Xmx512m -Xms512m -Xmn64m -XX:PermSize=64m -Xss256k -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSCompactAtFullCollection -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70</extraJvmArguments>
+                    <binFileExtensions>
+                        <unix>.sh</unix>
+                    </binFileExtensions>
+                    <platforms>
+                        <platform>windows</platform>
+                        <platform>unix</platform>
+                    </platforms>
+                    <repositoryName>lib</repositoryName>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <programs>
+                        <program>
+                            <mainClass>com.study.container.test.App</mainClass>
+                            <name>run</name>
+                        </program>
+                    </programs>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <descriptor>assembly.xml</descriptor>
@@ -53,6 +124,11 @@
                     <finalName>test</finalName>
                     <!--<outputDirectory>${basedir}/../output</outputDirectory>-->
                     <appendAssemblyId>false</appendAssemblyId>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.study.container.test.App</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
                 <executions>
                     <execution>
