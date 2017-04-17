@@ -13,7 +13,7 @@
         <module>bundle-first-parent</module>
         <module>test</module>
         <module>bundle-second-parent</module>
-        <module>module-archetype</module>
+        <module>bundle-archetype</module>
         <module>container-api</module>
     </modules>
 
