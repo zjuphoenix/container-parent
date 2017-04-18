@@ -103,7 +103,7 @@ public class ClassLoaderManager {
                 throw new FrameworkException(e);
             }
         }
-        //解析中间件的import.properties文件中的packages
+        //解析bundle配置文件，解析导出和引入的包
         try {
             Config config = ConfigFileUtil.toJson(ConfigFileUtil.middlewareConfigPath(bundlePath));
             //构建每个中间件单独的classloader

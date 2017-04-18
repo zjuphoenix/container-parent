@@ -48,9 +48,10 @@
                 </includes>
                  -->
 
-                <excludes>
+                <!--是否拷贝到target-->
+                <!--<excludes>
                     <exclude>container/</exclude>
-                </excludes>
+                </excludes>-->
 
                 <!-- maven default生命周期，process-resources阶段执行maven-resources-plugin插件的resources目标处理主资源目下的资源文件时，指定处理后的资源文件输出目录，默认是${build.outputDirectory}指定的目录
                 <targetPath>d:/</targetPath>
@@ -68,6 +69,16 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <excludes>
+                        <exclude>container/</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
