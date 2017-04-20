@@ -1,4 +1,4 @@
 {
-  "exportJar":"bundle-second-api-1.0.jar",
-  "importPackages":[]
+  "exportJars":["bundle-second-api-1.0.jar", "bundle-second-1.0.jar"],
+  "importPackages":["org.springframework"]
 }

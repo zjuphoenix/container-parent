@@ -11,6 +11,8 @@ import org.springframework.core.SpringVersion;
 public class BundleFirstImpl implements BundleFirstApi {
     public String createBundleFirst(String params) {
         System.out.println("BundleFirst:");
+        System.out.println("spring classloader:");
+        System.out.println(SpringVersion.class.getClassLoader());
         System.out.println(SpringVersion.getVersion());
         System.out.println(Version.class.getClassLoader());
         String version = Version.identify(BundleFirstImpl.class.getClassLoader()).toString();

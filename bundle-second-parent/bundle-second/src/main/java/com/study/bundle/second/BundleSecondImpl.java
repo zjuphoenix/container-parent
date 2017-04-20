@@ -11,6 +11,8 @@ import org.springframework.core.SpringVersion;
 public class BundleSecondImpl implements BundleSecondApi {
     public String createBundleSecond(String params) {
         System.out.println("BundleSecond:");
+        System.out.println("spring classloader:");
+        System.out.println(SpringVersion.class.getClassLoader());
         System.out.println(SpringVersion.getVersion());
         System.out.println(Version.class.getClassLoader());
         String version = Version.identify(BundleSecondImpl.class.getClassLoader()).toString();

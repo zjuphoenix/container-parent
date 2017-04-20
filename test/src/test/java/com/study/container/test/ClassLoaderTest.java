@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class ClassLoaderTest {
     @Test
     public void test() throws MalformedURLException, ClassNotFoundException {
+        //Class.forName("com.study.container.test.App");
         File dir = new File(getClass().getClassLoader().getResource("container").getFile());
         URLClassLoader classLoader = getContainerLoader(dir);
         Class<?> clazz = classLoader.loadClass("java.util.ArrayList");

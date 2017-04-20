@@ -130,12 +130,12 @@ public class BundleClassLoader extends URLClassLoader {
 
     Class loadClassFromImport(String name)
             throws FrameworkException {
-        if (importPackages != null && systemClassLoader != null) {
+        if (importPackages != null && bizClassLoader != null) {
             debugClassLoading("loadClassFromImport", name);
             for (String packageName : importPackages) {
                 if (StringUtils.isNotEmpty(packageName) && name.startsWith(packageName))
                     try {
-                        return systemClassLoader.loadClass(name);
+                        return bizClassLoader.loadClass(name);
                     } catch (ClassNotFoundException ex) {
                     } catch (Throwable t) {
                         throwClassLoadError(name, "loadClassFromImport", t);
