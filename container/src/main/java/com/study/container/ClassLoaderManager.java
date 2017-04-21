@@ -7,10 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.jar.JarEntry;
@@ -34,16 +32,6 @@ public class ClassLoaderManager {
         containerClassLoader = new ContainerClassLoader((URLClassLoader) getClass().getClassLoader());
         this.bundleExportClassManager = new BundleExportClassManager();
         containerClassLoader.setBundleExportClassManager(this.bundleExportClassManager);
-        /*try {
-            File containerDir = new File(systemClassLoader.getResource("container").toURI());
-            containerClassLoader = getContainerLoader(containerDir);
-            this.bundleExportClassManager = new BundleExportClassManager();
-            containerClassLoader.setBundleExportClassManager(this.bundleExportClassManager);
-        } catch (MalformedURLException e) {
-            logger.error("init container classloader error!", e);
-        } catch (URISyntaxException e) {
-            logger.error("container lib error!", e);
-        }*/
     }
 
     public void initBundles(){
@@ -68,26 +56,6 @@ public class ClassLoaderManager {
         bundleClassLoader.setSystemClassLoader(systemClassLoader);
         return bundleClassLoader;
     }
-
-    /*private ContainerClassLoader getContainerLoader(File containerDir)
-            throws MalformedURLException {
-        ArrayList list = new ArrayList();
-        // there are pandora related jars in containerDir, which is 'deploy/container.sar'
-        // deploy/container.sar/lib contains container related libs
-        File lib = new File(containerDir, "lib");
-        File[] containerLibs = lib.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".jar");
-            }
-        });
-        for (File jarFile : containerLibs) {
-            list.add(jarFile.toURI().toURL());
-        }
-
-        URL urls[] = (URL[]) list.toArray(new URL[list.size()]);
-        return new ContainerClassLoader(urls);
-    }*/
 
     private void deployBundle(File bundleFile) {
         String bundleName = bundleFile.getName();
