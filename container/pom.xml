@@ -17,11 +17,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.31</version>
         </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.6.Final</version>
-        </dependency>
         <!-- logging start -->
         <dependency>
             <groupId>org.slf4j</groupId>

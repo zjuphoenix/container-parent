@@ -11,16 +11,17 @@ import org.springframework.core.SpringVersion;
 public class BundleSecondImpl implements BundleSecondApi {
     public String createBundleSecond(String params) {
         System.out.println("BundleSecond:");
-        System.out.println("test import: spring classloader:");
+        System.out.print("test import: spring classloader:");
         System.out.println(SpringVersion.class.getClassLoader());
         System.out.println("spring version: "+SpringVersion.getVersion());
 
-        System.out.println("test export: BundleSecondImpl classloader:");
+        System.out.print("test export: BundleSecondImpl classloader:");
         System.out.println(getClass().getClassLoader());
 
-        System.out.println("test bundle class: io.netty.util.Version classloader:");
+        System.out.print("test bundle class: io.netty.util.Version classloader:");
         System.out.println(Version.class.getClassLoader());
         String version = Version.identify(BundleSecondImpl.class.getClassLoader()).toString();
+        System.out.print("bundle-second netty version:");
         System.out.println(version);
         return params;
     }
