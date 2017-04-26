@@ -53,18 +53,7 @@ public class ContainerServiceLoader {
         Method method = containerClassLoaderClass.getMethod("loadClass", String.class);
         Class<T> clazz = (Class<T>) method.invoke(containerClassLoaderWrapper, api.getName());
         ServiceLoader<T> serviceLoader = ServiceLoader.load(clazz, (ClassLoader)containerClassLoaderWrapper);
-        final T res = serviceLoader.iterator().next();
-        /*ClassLoader apiClassLoader = api.getClassLoader();
-        Class impClass = res.getClass();
-        ClassLoader imlClassLoader = impClass.getClassLoader();
-        Class interfaceClass = impClass.getInterfaces()[0];
-        ClassLoader interfaceClassLoader = interfaceClass.getClassLoader();*/
-        return (T) Proxy.newProxyInstance(api.getClassLoader(), new Class<?>[]{api}, new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                return res.getClass().getMethod(method.getName(), method.getParameterTypes()).invoke(res, args);
-            }
-        });
+        return serviceLoader.iterator().next();
     }
 
     private URLClassLoader getContainerLoader(File containerDir)

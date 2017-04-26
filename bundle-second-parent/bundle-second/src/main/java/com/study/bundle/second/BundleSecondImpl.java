@@ -14,6 +14,8 @@ public class BundleSecondImpl implements BundleSecondApi {
         System.out.print("test import: spring classloader:");
         System.out.println(SpringVersion.class.getClassLoader());
         System.out.println("spring version: "+SpringVersion.getVersion());
+        System.out.print("test import: BundleSecondApi classloader:");
+        System.out.println(BundleSecondApi.class.getClassLoader());
 
         System.out.print("test export: BundleSecondImpl classloader:");
         System.out.println(getClass().getClassLoader());

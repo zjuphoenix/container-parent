@@ -14,6 +14,8 @@ public class BundleFirstImpl implements BundleFirstApi {
         System.out.print("test import: spring classloader:");
         System.out.println(SpringVersion.class.getClassLoader());
         System.out.println("spring version: "+SpringVersion.getVersion());
+        System.out.print("test import: BundleFirstApi classloader:");
+        System.out.println(BundleFirstApi.class.getClassLoader());
 
         System.out.print("test export: BundleFirstImpl classloader:");
         System.out.println(getClass().getClassLoader());
